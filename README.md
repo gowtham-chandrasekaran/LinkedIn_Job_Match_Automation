@@ -60,3 +60,25 @@ You can import the ready workflow JSON or assemble it yourself.
 
 ---
 
+### Technologies
+
+- n8n for orchestration
+- OpenAI for parsing and scoring
+- Google Sheets API for storage
+- RSS as the job source
+
+### Prerequisites
+
+- OpenAI API access
+- Google account with Sheets access
+- n8n instance (local, Docker, or hosted)
+- Resume text ready to embed in the scoring prompt
+
+### Recommended Sheet Columns
+
+Link (unique), Title, Date, Job Description, Exp Years Required, Type Of Job, Skills, Education Required, Salary Range, Work Arrangement, Location, Company Name, Benefits, Visa Sponsorship, Score, Gaps, Matched Skills, Rationale.
+
+### Author
+
+Gowtham Chandrasekaran
+www.gowthamchandrasekaran.com
