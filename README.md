@@ -24,7 +24,7 @@ You can import the ready workflow JSON or assemble it yourself.
 ### Option 1: Import the provided workflow
 1. Clone/download this repo.  
 2. Open your n8n instance.  
-3. **Import** `workflow/Linkedin Job Apply.json`.  
+3. **Import** `Linkedin_Job_Match_Automation.json`.  
 4. Create credentials:
    - **OpenAI** API key
    - **Google Sheets** OAuth2
