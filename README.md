@@ -80,5 +80,5 @@ Link (unique), Title, Date, Job Description, Exp Years Required, Type Of Job, Sk
 
 ### Author
 
-Gowtham Chandrasekaran
-www.gowthamchandrasekaran.com
+- Gowtham Chandrasekaran
+- Portfolio: www.gowthamchandrasekaran.com
