@@ -9,6 +9,9 @@ This system runs end-to-end job discovery and triage using **n8n**, **OpenAI**, 
 
 ## Job Filtering Workflow
 
+## Visual Workflow
+![n8n workflow](workflow.png)
+
 ### Objective
 - Collect job descriptions from public RSS feeds.  
 - Evaluate resume fit with an LLM.  
