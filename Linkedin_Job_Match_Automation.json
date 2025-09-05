@@ -1,0 +1,576 @@
+{
+  "name": "Linkedin_Job_Match_Automation",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 12
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        368,
+        0
+      ],
+      "id": "9b1a23cd-6891-4725-a948-ad5df2455031",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "url": "https://rss.app/feeds/8bAXnEVa7HoD10XL.xml",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.rssFeedRead",
+      "typeVersion": 1.2,
+      "position": [
+        576,
+        0
+      ],
+      "id": "401df184-78ac-4729-9c8a-7693015b8edf",
+      "name": "RSS Read"
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1Tt7aBiqAoFSEJ4R-jnzGNN96RjcMAjK9vNrRvfZZupo",
+          "mode": "list",
+          "cachedResultName": "LinkedIn Job Listings",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Tt7aBiqAoFSEJ4R-jnzGNN96RjcMAjK9vNrRvfZZupo/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Tt7aBiqAoFSEJ4R-jnzGNN96RjcMAjK9vNrRvfZZupo/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Link": "={{ $('RSS Read').item.json.link }}",
+            "Title": "={{ $('RSS Read').item.json.title }}",
+            "Date": "={{ $('RSS Read').item.json.pubDate }}",
+            "Job Description": "={{ $('JSON Extractor').item.json.message.content.job_description }}",
+            "Exp Years Required": "={{ $('JSON Extractor').item.json.message.content.experience_years_required }}",
+            "Type Of Job": "={{ $('JSON Extractor').item.json.message.content.type_of_job }}",
+            "Skills": "={{ $('JSON Extractor').item.json.message.content.skills }}",
+            "Education Required": "={{ $('JSON Extractor').item.json.message.content.education_requirements }}",
+            "Salary Range": "={{ $('JSON Extractor').item.json.message.content.salary_range }}",
+            "Work Arrangement": "={{ $('JSON Extractor').item.json.message.content.work_arrangement }}",
+            "Location": "={{ $('JSON Extractor').item.json.message.content.location }}",
+            "Company Name": "={{ $('JSON Extractor').item.json.message.content.company_name }}",
+            "Benefits": "={{ $('JSON Extractor').item.json.message.content.benefits }}",
+            "Visa Sponsorship": "={{ $('JSON Extractor').item.json.message.content.visa_sponsorship }}",
+            "Score": "={{ $json.message.content.score }}",
+            "Gaps": "={{ $json.message.content.gaps }}",
+            "Matched Skills": "={{ $json.message.content.matched_skills }}",
+            "Rationale": "={{ $json.message.content.rationale }}"
+          },
+          "matchingColumns": [
+            "Link"
+          ],
+          "schema": [
+            {
+              "id": "Title",
+              "displayName": "Title",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Score",
+              "displayName": "Score",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Link",
+              "displayName": "Link",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Job Description",
+              "displayName": "Job Description",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Exp Years Required",
+              "displayName": "Exp Years Required",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Type Of Job",
+              "displayName": "Type Of Job",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Skills",
+              "displayName": "Skills",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Education Required",
+              "displayName": "Education Required",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Salary Range",
+              "displayName": "Salary Range",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Work Arrangement",
+              "displayName": "Work Arrangement",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Location",
+              "displayName": "Location",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Date",
+              "displayName": "Date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Company Name",
+              "displayName": "Company Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Benefits",
+              "displayName": "Benefits",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Visa Sponsorship",
+              "displayName": "Visa Sponsorship",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Gaps",
+              "displayName": "Gaps",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Matched Skills",
+              "displayName": "Matched Skills",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Rationale",
+              "displayName": "Rationale",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        2512,
+        0
+      ],
+      "id": "a6f95fcd-691e-4f11-aab3-309b88844a88",
+      "name": "Append or update row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "S6nd9AsE03q20EZf",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "={{ $('RSS Read').item.json.link }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1088,
+        16
+      ],
+      "id": "3b961bb4-5a29-4132-a0a6-ef4ca6202e6b",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-4O-MINI"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=You are an intelligent assistant. Given a job listing page, extract and return a single JSON object with the following fields. Use exact strings from the page when possible, normalize lists as comma-separated strings, and use “NA” if a field is not present.\n\nRules:\n • Do not invent values; only extract what appears on the page.\n • Keep list-type fields comma-separated within a single string.\n • Trim whitespace and remove duplicate items within lists.\n • If multiple salary figures appear, prefer the primary/current range near the top-card or schema markup.",
+              "role": "system"
+            },
+            {
+              "content": "=Here's the job site:\n{{ $json.data }}"
+            },
+            {
+              "content": "Please output the data in JSON format, using the following structure:\n{\n“company_name”: “”,                 // Name of the company\n“benefits”: “”,                     // Comma-separated benefits (e.g., 401(k), medical, dental, vision, PTO, etc.)\n“visa_sponsorship”: “”,             // “yes” if explicitly stated the company sponsors visas, “no” if explicitly stated they do not, “NA” if not specified\n“job_description”: “”,              // Concise summary of responsibilities and requirements\n“location”: “”,                     // City, State (and country if available)\n“type_of_job”: “”,                  // e.g., “Full-time”, “Part-time”, “Contract”, “W2”, etc.\n“skills”: “”,                       // Comma-separated technical and soft skills/technologies\n“experience_years_required”: “”,    // Numeric or textual expression from listing (e.g., “3+ years”)\n“education_requirements”: “”,       // e.g., “Bachelor degree”, “Master’s”, etc., or “NA”\n“salary_range”: “”,                 // As written in the post (e.g., “$128,000 - $160,000 per year”), or “NA”\n“work_arrangement”: “”              // e.g., “Hybrid (3 days in-office)”, “Remote”, “Onsite”, plus any specifics if present\n}\n\n\n\n",
+              "role": "assistant"
+            }
+          ]
+        },
+        "jsonOutput": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        1408,
+        16
+      ],
+      "id": "bbaa61a0-7fda-4370-84a2-94219ca8c836",
+      "name": "JSON Extractor",
+      "credentials": {
+        "openAiApi": {
+          "id": "wTqU32iokbpUtaKV",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-4O-MINI"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "You are an assistant that rates how well a job matches a candidate’s resume.\n\nInputs:\n- Job Website data\n- Resume\n\nScoring (0–5 total):\n- Skills match (0–2)\n- Experience level (0–1)\n- Past role match (0–1)\n- Qualifications (0–1)\n\nRules:\n- Be strict. Do not infer unstated skills.\n- Provide a ≤60-word rationale.\n- Output ONE LINE of VALID JSON.\n- All values must be STRINGS. No arrays. No newlines.\n- For multi-items fields, join with \", \" and replace internal commas in items with \" / \".",
+              "role": "system"
+            },
+            {
+              "content": "=Job Website data:\n{{ $('RSS Read').item.json.content }}\n\nResume:\nGOWTHAM CHANDRASEKARAN | GENERATIVE AI | FULL STACK DEVELOPER | SOFTWARE ENGINEER\n(669) 204 1307 | gowtham6309@gmail.com\n | linkedin.com/in/gowtham-c\n\nSUMMARY\n\nFor 4 years, I’ve built production-ready applications that don’t just run — they think. Combining full-stack expertise (React, Angular,\nNode.js, Python-FastAPI) with Generative AI in RAG and Agentic AI, I deliver solutions that are intelligent, scalable, and impactful.\n\nWORK EXPERIENCE\nSOFTWARE ENGINEER – FULL STACK & GENAI | THEREAFTER INC. AUG 2024-PRESENT\n\nBuilt secure production ready AI-powered solutions for a digital platform streamlining end-of-life planning and preserving legacies.\n\nGenerative AI Development\n• Built RAG chatbot with Langchain.js using Llama 3.3 70B, BGE embeddings and Qdrant — boosted query speed by 40%.\n• Eliminated 100% of sensitive data leaks by integrating Presidio PII masking and LLM guardrails.\n• Developed GPT-4 podcast interviewer with STT & TTS — boosted engagement session time by 35%.\n\nFull-Stack Development & Cloud Engineering\n• Built scalable Node.js microservices with React frontend; applied lazy loading to cut load times by 30%.\n• Integrated AWS Cognito with Node.js APIs to manage user sign-up, sign-in, and access control.\n• Architected event-driven notifications with SendGrid, Twilio & CRON — reduced manual follow-ups by 80%.\n• Automated AWS deployments using CodePipeline; integrated EC2, S3 & CloudWatch for seamless monitoring.\n• Strengthened AWS security with IAM policies, encryption, and vulnerability fixes — passed all audits with zero issues.\n• Led 5 member team for feature delivery & maintenance — increased sprint velocity by 20%.\n\nSOFTWARE ENGINEER – FULL STACK & GENAI | JAUNT AUG 2024-NOV 2024\n\nBuilt a GenAI-driven travel app that personalizes itineraries and guides users through contextual audio.\n\nGenerative AI Development\n• Built a RAG chatbot with LangChain, OpenAI embeddings, and cross-encoder reranking — boosted content relevance by 25%.\n• Improved contextual reliability of travel guides using role-based prompts and automated evaluation with LLM-as-a-judge.\n• Integrated metadata filters for smarter retrieval — increased precision of recommendations and reduced irrelevant results.\n\nFull-Stack Development & Data Engineering\n• Developed the backend in FastAPI, integrating retrieval pipelines and ensuring low-latency responses for real-time user queries.\n• Built Selenium-based web scrapers to unify multi-site location data — expanded coverage of tourist spots.\n• Applied DBSCAN clustering to group related locations — enabled deduplication and ensured consistency.\n\nSOFTWARE ENGINEERING ASSISTANT | SAN JOSE STATE UNIVERSITY DEC 2023 – JUL 2024\n\nDeveloped AI-driven tools and optimized the university web site for academic operations and digital marketing.\n\nGenerative AI Development\n• Built a Streamlit chatbot with OpenAI + SQL — enabled staff to query databases in natural language.\n\nWeb Analytics & Optimization\n• Leveraged Google Analytics to analyze audience, acquisition, and user behavior — provided insights that informed content\n\nimprovements.\n• Utilized Siteimprove to detect and fix broken links — improved website reliability and user experience.\n\nSOFTWARE ENGINEER | TATA CONSULTANCY SERVICES MAY 2019 – MAY 2021\n\nSpecialized in building interactive dashboards and responsive UIs to improve monitoring and user experience.\n\nFull-Stack Development\n• Built a React dashboard for server metrics with real-time KPIs and dynamic filters — improved monitoring efficiency.\n• Optimized performance with lazy loading, Redux, and code-splitting — reduced load time by 30%.\n• Integrated REST APIs with backend services — ensured seamless real-time updates.\n• Strengthened code quality with reviews, best practices, and Jest/Enzyme testing — reduced production bugs.\n\nTECHNICAL SKILLS\n\nLanguages: Python, Java, JavaScript (ES6+), TypeScript, HTML5, C, C++\nFrameworks & Frontend: React, Next.js, Angular, Redux, Tailwind CSS\nBackend & APIs: Node.js, Nest.js, Flask, FastAPI, REST, GraphQL, API Design, Microservices\nGenAI Tools: LangChain, LLMs (GPT-4, Llama 3.3, Claude), Embeddings (OpenAI, BGE), Vector DBs (Qdrant, Pinecone, Chroma)\nDevOps & Cloud: AWS (EC2, S3, RDS, Lambda, SQS, ECS, API Gateway, Cognito, CloudWatch, Bedrock), Docker, Kubernetes, Jenkins, Git,\nCI/CD Pipelines (AWS CodePipeline)\nDatabases: PostgreSQL, MySQL, MongoDB, Cassandra, Oracle, DynamoDB\n\nEDUCATION\n\nM.S. Computer Science, San Jose State University | GPA: 3.92/4.00 Aug 2021 – Dec 2023\nB.E. Computer Science & Engineering, Anna University | GPA: 4.00/4.00 Aug 2015 – Apr 2019\n"
+            },
+            {
+              "content": "Please return the JSON data structured the following way:\n\n{\"score\":\"<0-5>\",\"rationale\":\"<≤60 words>\",\"gaps\":\"<gap1, gap2, gap3>\",\"matched_skills\":\"<skill1, skill2, skill3>\"}",
+              "role": "assistant"
+            }
+          ]
+        },
+        "jsonOutput": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        1920,
+        16
+      ],
+      "id": "dd365471-cd85-437b-9e0b-7967697984eb",
+      "name": "Score Generator",
+      "credentials": {
+        "openAiApi": {
+          "id": "wTqU32iokbpUtaKV",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "amount": 10
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        1232,
+        16
+      ],
+      "id": "5398d3ec-98ef-4831-97bf-816d8a905e4f",
+      "name": "Wait",
+      "webhookId": "26318821-f062-44be-88cc-f1528892413d"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        832,
+        0
+      ],
+      "id": "29fe0755-d003-4a9d-9890-233228b90342",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {
+        "amount": 10
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        1712,
+        16
+      ],
+      "id": "6e4e00a1-2b55-4db8-ab67-fdc43af10526",
+      "name": "Wait1",
+      "webhookId": "16720230-f09d-4b06-b4ba-c85e730a5dad"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "8c06d116-a829-4bb5-82a2-8ae3fa38c712",
+              "leftValue": "={{ $json.message.content.score.toNumber() }}",
+              "rightValue": 4,
+              "operator": {
+                "type": "number",
+                "operation": "gte"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        2272,
+        16
+      ],
+      "id": "b2d70616-fb9d-48f4-b109-4db7158579f4",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "content": "If score is greater than or equal to 4, only then add to spreadsheet\n\n",
+        "height": 80,
+        "width": 192
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        2240,
+        -80
+      ],
+      "id": "9b0c9069-e6b3-49bc-9344-7ec8f3474a54",
+      "name": "Sticky Note"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "RSS Read",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "RSS Read": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "JSON Extractor": {
+      "main": [
+        [
+          {
+            "node": "Wait1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Score Generator": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append or update row in sheet": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "JSON Extractor",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait1": {
+      "main": [
+        [
+          {
+            "node": "Score Generator",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Append or update row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "c223fc4d-fb17-4b86-ac4a-1dd3ea614edb",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "a6a8b8b61712f86be42b3f89b8575724598b348851299102d575e0d83eee6dad"
+  },
+  "id": "T7pgiUdFi8wTcpfk",
+  "tags": []
+}
