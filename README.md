@@ -22,9 +22,10 @@ This system runs end-to-end job discovery and triage using **n8n**, **OpenAI**, 
 
 ## How to Use
 
-You can import the ready workflow JSON or assemble it yourself.
+You can import the ready workflow JSON.
 
-### Option 1: Import the provided workflow
+Import the provided workflow:
+
 1. Clone/download this repo.  
 2. Open your n8n instance.  
 3. **Import** `Linkedin_Job_Match_Automation.json`.  
@@ -34,30 +35,6 @@ You can import the ready workflow JSON or assemble it yourself.
 5. In the scoring node, paste your latest **resume text** into the prompt.  
 6. In the Sheets node, select your Spreadsheet and Sheet.  
 7. Run once manually or enable the **Schedule**.
-
-### Option 2: Build it manually in n8n
-**Step 1 — Ingest**
-1) **Schedule Trigger**: pick a daily time (server TZ).  
-2) **RSS Read**: point to a LinkedIn/other feed for your role/location filters.  
-3) **Loop over (Split in Batches)**: cap items per run (e.g., 1).
-
-**Step 2 — Score relevance**
-4) **Loop items**: iterate each RSS entry.  
-5) **HTTP Request**: fetch job page HTML via the link.  
-6) **Wait**: brief delay (5–10s) to control rate limits.  
-7) **OpenAI (JD vs Resume)**: return:
-   - `score` (0–5)  
-   - `rationale` (≤60 words)  
-   - `gaps` (list)  
-   - `matched_skills` (list)
-8) **If**: continue only if `score >= 4` (tune as needed).
-
-**Step 3 — Normalize + write**
-
-9) **Wait**: optional short delay.  
-10) **OpenAI or Code**: extract fields (Title, Company, Location, Skills, etc.).  
-11) **Code (optional)**: shape a row object for Sheets.  
-12) **Google Sheets**: append or upsert by `Link` to avoid duplicates.
 
 ---
 
