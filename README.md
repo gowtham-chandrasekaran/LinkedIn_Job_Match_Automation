@@ -5,7 +5,6 @@ This system runs end-to-end job discovery and triage using **n8n**, **OpenAI**, 
 ## About n8n and why it’s used
 **n8n** is a self-hosted automation platform. I used it to chain **RSS → HTTP → LLM → Sheets** with low code, reproducible runs, and full control of keys and cost.
 
----
 
 ## Job Filtering Workflow
 
@@ -17,8 +16,6 @@ This system runs end-to-end job discovery and triage using **n8n**, **OpenAI**, 
 - Evaluate resume fit with an LLM.  
 - Skip low-match roles using a threshold.  
 - Persist qualified roles to Google Sheets for review.
-
----
 
 ## How to Use
 
@@ -35,8 +32,6 @@ Import the provided workflow:
 5. In the scoring node, paste your latest **resume text** into the prompt.  
 6. In the Sheets node, select your Spreadsheet and Sheet.  
 7. Run once manually or enable the **Schedule**.
-
----
 
 ### Technologies
 
