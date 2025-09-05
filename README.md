@@ -53,6 +53,7 @@ You can import the ready workflow JSON or assemble it yourself.
 8) **If**: continue only if `score >= 4` (tune as needed).
 
 **Step 3 — Normalize + write**
+
 9) **Wait**: optional short delay.  
 10) **OpenAI or Code**: extract fields (Title, Company, Location, Skills, etc.).  
 11) **Code (optional)**: shape a row object for Sheets.  
